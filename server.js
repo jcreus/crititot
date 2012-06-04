@@ -6,7 +6,7 @@ Function.prototype.bind = function(scope) {
 	}
 }
 
-var sqlite3 = require('sqlite3');
+var sqlite3 = require('./sqlite3/lib/sqlite3');
 var express = require('express');
 var fs = require('fs');
 var crypto = require('crypto');
