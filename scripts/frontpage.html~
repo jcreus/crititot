@@ -1,0 +1,13 @@
+<html>
+<head>
+<script src="http://portatil-acer:1337/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="wsrw_Fp.js"></script>
+</head>
+<body>
+<button>hola</button>
+<select>
+<option>hi</option>
+<option>bye</option>
+</select>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<div id="navbar">
+<table id="tablebar">
+<tr>
+<td style="width:20%;">
+<a href="/" class="nodecoration">Portada</a>
+</td>
+<td style="text-align:right;">
+<button onclick="critiques.toggleLogin('publibox');">Publica una recomanació</button>
+<form action="/newfilm" method="post">
+<div id="publibox" class="box">
+<table style="width:100%;">
+<tr>
+<td class="esq">Títol:</td><td class="dre">
+<div class="holder">
+<input type="text" name="titol" id="filmtitle" autocomplete="off">
+<div class="suggest" id="filmsuggest">
+<div id="_filmsuggest">
+
+</div>
+<div class="bottom">
+Cancel·la
+</div>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="esq">Director(a):</td><td class="dre"><input type="text" name="director" id="filmdirector"></td>
+</tr>
+<tr>
+<td colspan="2">
+<textarea name="review" style="font-family:sans-serif;width:100%;height:200px;"></textarea>
+</td>
+</tr>
+<tr>
+<td>
+<input type="hidden" name="valoracio" id="valoracio" value="0">
+<div id="stars">
+<div class="star-noselected"></div>
+<div class="star-noselected"></div>
+<div class="star-noselected"></div>
+<div class="star-noselected"></div>
+<div class="star-noselected"></div>
+</div>
+</td>
+<td style="text-align:center;">
+<input type="submit" value="Publica">
+</td>
+</table>
+</form>
+</div>
+</td>
+<td style="text-align:right;width:20%;position:relative;">
+<button onclick="critiques.toggleLogin('loginbox');"><%=user%></button>
+<div id="loginbox" class="box">
+<div class="link"><a href="/safata">Safata d'entrada</a></div>
+<div class="link"><a href="/profile/<%=user%>">El teu perfil</a></div>
+<div class="link"><a href="/config">Configuració</a></div>
+<div class="link"><a href="/logout">Surt de la sessió</a></div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="realcontent">

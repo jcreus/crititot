@@ -1,0 +1,45 @@
+<div id="navbar">
+<table id="tablebar">
+<tr>
+<td style="width:20%;">
+<a href="/" class="nodecoration">Portada</a>
+</td>
+<td style="text-align:right;width:20%;position:relative;">
+<button onclick="critiques.toggleLogin('loginbox');">Registre/entrada</button>
+<div id="loginbox" class="box">
+<form action="/login" method="post">
+  <fieldset>
+    <legend>Entrada:</legend>
+    <div>
+    <input class="entrada" name="user" type="text" placeholder="Nom d'usuari"/>
+    </div>
+    <div>
+    <input class="entrada" name="password" type="password" placeholder="Contrasenya" />
+    </div>
+    <div style="text-align:center;"><input class="ac" type="submit" value="Entrada"></div>
+  </fieldset>
+</form>
+<form action="/create" method="post">
+  <fieldset>
+    <legend>Registre:</legend>
+    <div>
+    <input class="entrada" name="user" type="text" placeholder="Nom d'usuari"/>
+    </div>
+    <div>
+    <input class="entrada" name="bonic" type="text" placeholder="Nom sencer (p. e.: Richard Stallman)"/>
+    </div>
+    <div>
+    <textarea name="desc" placeholder="Descripció" style="width:100%;font-family:sans-serif;"></textarea>
+    </div>
+    <div>
+    <input class="entrada" name="password" type="password" placeholder="Contrasenya"/>
+    </div>
+    <div style="text-align:center;"><input class="ac" type="submit" value="Registre"></div>
+  </fieldset>
+</form>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="realcontent">
