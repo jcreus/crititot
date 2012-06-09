@@ -196,6 +196,18 @@ legend {
 	background:rgba(224, 255, 255,0.2);
 
 }
+#bmore {
+	margin:0 auto;
+	border:1px solid lightgray;
+	border-radius:5px;
+	margin:10px;
+	padding:10px;
+	background:rgba(224, 255, 255,0.2);
+	min-width:200px;
+}
+#bmored {
+	text-align:center;
+}
 .recind {
 	border-top:1px solid gray;
 	border-bottom:1px solid gray;

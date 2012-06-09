@@ -2,15 +2,16 @@
 <table id="tablebar">
 <tr>
 <td style="width:20%;">
-<a href="/" class="nodecoration">Portada</a>
+<a href="/" class="nodecoration"><<bar-mainpage>></a>
 </td>
 <td style="text-align:right;">
-<button onclick="critiques.toggleLogin('publibox');">Publica una recomanació</button>
+<button onclick="critiques.toggleLogin('publibox');"><<bar-recommendation>></button>
 <form action="/newfilm" method="post">
 <div id="publibox" class="box">
+<p style="text-align:center;"><label><input type="radio" id="film" checked name="tip" value="peli"> <<bar-film>></label> <label><input name="tip" type="radio" id="llibre" value="llibre"> <<bar-book>></label></p>
 <table style="width:100%;">
 <tr>
-<td class="esq">Títol:</td><td class="dre">
+<td class="esq"><<bar-title>>:</td><td class="dre">
 <div class="holder">
 <input type="text" name="titol" id="filmtitle" autocomplete="off">
 <div class="suggest" id="filmsuggest">
@@ -18,14 +19,14 @@
 
 </div>
 <div class="bottom">
-Cancel·la
+<<bar-cancel>>
 </div>
 </div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="esq">Director(a):</td><td class="dre"><input type="text" name="director" id="filmdirector"></td>
+<td class="esq"><<bar-directorauthor>>:</td><td class="dre"><input type="text" name="director" id="filmdirector"></td>
 </tr>
 <tr>
 <td colspan="2">
@@ -44,7 +45,7 @@ Cancel·la
 </div>
 </td>
 <td style="text-align:center;">
-<input type="submit" value="Publica">
+<input type="submit" value="<<bar-publish>>">
 </td>
 </table>
 </form>
@@ -53,10 +54,10 @@ Cancel·la
 <td style="text-align:right;width:20%;position:relative;">
 <button onclick="critiques.toggleLogin('loginbox');"><%=user%></button>
 <div id="loginbox" class="box">
-<div class="link"><a href="/safata">Safata d'entrada</a></div>
-<div class="link"><a href="/profile/<%=user%>">El teu perfil</a></div>
-<div class="link"><a href="/config">Configuració</a></div>
-<div class="link"><a href="/logout">Surt de la sessió</a></div>
+<div class="link"><a href="/inbox"><<bar-inbox>></a></div>
+<div class="link"><a href="/profile/<%=user%>"><<bar-yourprofile>></a></div>
+<div class="link"><a href="/config"><<bar-configuration>></a></div>
+<div class="link"><a href="/logout"><<bar-logout>></a></div>
 </div>
 </td>
 </tr>

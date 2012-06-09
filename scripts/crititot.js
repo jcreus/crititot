@@ -6,6 +6,8 @@ Function.prototype.bind = function(scope) {
 	}
 }
 
+var LIMIT = 5;
+
 critiques = {};
 
 critiques.toggleLogin = function (p) {
@@ -24,25 +26,44 @@ critiques.check = function (el) {
 		el.parentNode.getElementsByTagName("span")[0].style.display = 'inline';
 	}
 }
-
-critiques.loadprofile = function () {
-	var all = document.getElementsByClassName("recind");
-	for (var i=0; i<all.length; i++) {
-		all[i].onclick = function (e) {
-			if (e.target.nodeName.toLowerCase() != "a" && e.target.parentNode.nodeName.toLowerCase() != "a") {
-				e.preventDefault();
-				if (history.pushState) {
-					critiques.loadpage('/review/'+this.getAttribute("data-id"));
-					history.pushState({url: '/review/'+this.getAttribute("data-id")},'/review/'+this.getAttribute("data-id"), '/review/'+this.getAttribute("data-id"));
-				} else {
-					location.href = '/review/'+this.getAttribute("data-id");
-				}
-				return false;
+critiques.current = 0;
+critiques.loadprofile = function (is) {
+	critiques.current = 0;
+	$(".recind").live('click', function (e) {
+		if (e.target.nodeName.toLowerCase() != "a" && e.target.parentNode.nodeName.toLowerCase() != "a") {
+			e.preventDefault();
+			if (history.pushState) {
+				critiques.loadpage('/review/'+this.getAttribute("data-id"));
+				history.pushState({url: '/review/'+this.getAttribute("data-id")},'/review/'+this.getAttribute("data-id"), '/review/'+this.getAttribute("data-id"));
+			} else {
+				location.href = '/review/'+this.getAttribute("data-id");
 			}
+			return false;
 		}
+	});
+	if ($(".recind").length != LIMIT) {
+		$("#bmore").hide();
 	}
+	if (!is) return;
+	$("#dofollow").click( function () {
+		var page = location.pathname;
+		$.post("/dofollow", {user:$(this).attr("data-user")}, function (data) {
+			if (data == "notok") { alert('Si us plau, entra al compte!'); return; }
+			if (history.pushState) critiques.loadpage(page);
+			else location.pathname = page;
+		});
+	});
+	$("#unfollow").click( function () {
+		var page = location.pathname;
+		$.post("/unfollow", {user:$(this).attr("data-user")}, function (data) {
+			if (data == "notok") { alert('Si us plau, entra al compte!'); return; }
+			else { 
+				if (history.pushState) critiques.loadpage(page);
+				else location.pathname = page;
+			}
+		});
+	});
 }
-
 critiques.load = function () {
 	/*var tots = document.getElementsByClassName("combose");
 	for (var i=0; i<tots.length; i++) {
@@ -53,7 +74,7 @@ critiques.load = function () {
 	var el = document.getElementById("filmtitle");
 	if (el) {
 		el.onkeyup = function () {
-			socket.emit('request',{my:this.value});
+			socket.emit('request',{my:this.value, tip:$('input:radio[name=tip]:checked').val()});
 		};
 		document.getElementsByClassName("bottom")[0].onclick = function () {
 			this.parentNode.style.display = 'none';
@@ -73,8 +94,23 @@ critiques.load = function () {
 			};
 		}
 	}
-    if (location.pathname.indexOf("/profile") === 0) critiques.loadprofile();
-    if (history.pushState) critiques.enllacos();
+	if (location.pathname.indexOf("/profile") === 0) critiques.loadprofile(true);
+	if (location.pathname.indexOf("/inbox") === 0) critiques.loadprofile();
+	if (location.pathname.indexOf("/director") === 0) critiques.loadprofile();
+	if (location.pathname.indexOf("/film") === 0) critiques.loadprofile();
+	if (history.pushState) critiques.enllacos();
+	$("#bmore").live('click', function (e) {
+		critiques.current += LIMIT;
+		$.get($(this).attr("data-path")+"/"+critiques.current, function (t) {
+			var $m = $(t);
+			var keep = false;
+			if ($m.length == LIMIT) {
+				keep = true;
+			}
+			$(".recs").append($m);
+			if (!keep) { $("#bmore").fadeOut(); }
+		});
+	});
 }
 critiques.clearChildren = function (a) {
 	if (a.hasChildNodes()) {
@@ -90,7 +126,10 @@ critiques.loadpage = function (u,p) {
 	critiques.xhr.onreadystatechange = function () {
 		if (critiques.xhr.readyState == 4 && critiques.xhr.status == 200) {
 			document.getElementById("realcontent").innerHTML = critiques.xhr.responseText;
-			if (u.indexOf("/profile") === 0) critiques.loadprofile();
+			if (u.indexOf("/profile") === 0) critiques.loadprofile(true);
+			if (u.indexOf("/inbox") === 0) critiques.loadprofile();
+			if (u.indexOf("/director") === 0) critiques.loadprofile();
+			if (u.indexOf("/film") === 0) critiques.loadprofile();
 		}
 	};
 	critiques.xhr.open("GET", u+"?ep=yes", true);
@@ -100,25 +139,22 @@ critiques.loadpage = function (u,p) {
 critiques.initial = location.pathname;
 
 critiques.enllacos = function () {
-	var all = document.getElementsByTagName("a");
-	for (var i=0; i<all.length; i++) {
-		all[i].addEventListener('click', function (e) {
-			if (this.getAttribute("href") == "/logout") return;
-			e.preventDefault();
-			critiques.loadpage(this.getAttribute("href"));
-			history.pushState({url: this.getAttribute("href")},this.getAttribute("href"), this.getAttribute("href"));
-			var a = document.getElementsByClassName('box');
-			$(a).slideUp();
-			return false;
-		});
-	}
+	$("a").live('click', function (e) {
+		if (this.getAttribute("href") == "/logout") return;
+		e.preventDefault();
+		critiques.loadpage($(this).attr("href"));
+		history.pushState({url: $(this).attr("href")},$(this).attr("href"), $(this).attr("href"));
+		var a = document.getElementsByClassName('box');
+		$(a).slideUp();
+		return false;
+	});
 	window.onpopstate = function (e) {
 		if (e.state) critiques.loadpage(e.state.url);
 		else critiques.loadpage(critiques.initial);
 	};
 }
 
-var socket = io.connect('http://portatil-acer:8888');
+var socket = io.connect(location.protocol+'//'+location.host);
 socket.on('ajax', function (data) {
 	var el = document.getElementById("_filmsuggest");
 	critiques.clearChildren(el);

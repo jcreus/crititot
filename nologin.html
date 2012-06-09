@@ -2,39 +2,39 @@
 <table id="tablebar">
 <tr>
 <td style="width:20%;">
-<a href="/" class="nodecoration">Portada</a>
+<a href="/" class="nodecoration"><<bar-mainpage>></a>
 </td>
 <td style="text-align:right;width:20%;position:relative;">
-<button onclick="critiques.toggleLogin('loginbox');">Registre/entrada</button>
+<button onclick="critiques.toggleLogin('loginbox');"><<bar-loginregister>></button>
 <div id="loginbox" class="box">
 <form action="/login" method="post">
   <fieldset>
-    <legend>Entrada:</legend>
+    <legend><<bar-login>>:</legend>
     <div>
-    <input class="entrada" name="user" type="text" placeholder="Nom d'usuari"/>
+    <input class="entrada" name="user" type="text" placeholder="<<bar-username>>"/>
     </div>
     <div>
-    <input class="entrada" name="password" type="password" placeholder="Contrasenya" />
+    <input class="entrada" name="password" type="password" placeholder="<<bar-password>>" />
     </div>
-    <div style="text-align:center;"><input class="ac" type="submit" value="Entrada"></div>
+    <div style="text-align:center;"><input class="ac" type="submit" value="<<bar-login>>"></div>
   </fieldset>
 </form>
 <form action="/create" method="post">
   <fieldset>
-    <legend>Registre:</legend>
+    <legend><<bar-register>>:</legend>
     <div>
-    <input class="entrada" name="user" type="text" placeholder="Nom d'usuari"/>
+    <input class="entrada" name="user" type="text" placeholder="<<bar-username>>"/>
     </div>
     <div>
-    <input class="entrada" name="bonic" type="text" placeholder="Nom sencer (p. e.: Richard Stallman)"/>
+    <input class="entrada" name="bonic" type="text" placeholder="<<bar-fullname>>"/>
     </div>
     <div>
-    <textarea name="desc" placeholder="Descripció" style="width:100%;font-family:sans-serif;"></textarea>
+    <textarea name="desc" placeholder="<<bar-description>>" style="width:100%;font-family:sans-serif;"></textarea>
     </div>
     <div>
-    <input class="entrada" name="password" type="password" placeholder="Contrasenya"/>
+    <input class="entrada" name="password" type="password" placeholder="<<bar-password>>"/>
     </div>
-    <div style="text-align:center;"><input class="ac" type="submit" value="Registre"></div>
+    <div style="text-align:center;"><input class="ac" type="submit" value="<<bar-register>>"></div>
   </fieldset>
 </form>
 </div>

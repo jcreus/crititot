@@ -1,5 +1,21 @@
 {
-  "name":"crititot",
-  "node":"0.6.17",
-  "author":"jcreus"
+  "name": "crititot",
+  "subdomain": "crititot",
+  "scripts": {
+    "start": "server.js"
+  },
+  "version": "0.2.0-6",
+  "engines": {
+    "node": "0.6.17"
+  },
+  "dependencies": {
+    "gzippo": "0.1.x",
+    "socket.io": "0.9.x",
+    "sqlite3": "2.1.3",
+    "express": "2.5.8",
+    "html-truncate": "0.3.0",
+    "mongoose": "2.6.5",
+    "connect-mongo": "0.1.9",
+    "connect": "2.3.2"
+  }
 }

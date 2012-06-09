@@ -1,0 +1,14 @@
+<div class="user" style="padding:10px;">
+<form action="/newconfig" method="post">
+<fieldset>
+<legend><<config-language>></legend>
+<select name="lang" style="width:100%;">
+<option value="en" <%=selected('en')%>>English</option>
+<option value="ca" <%=selected('ca')%>>Català</option>
+</select>
+</fieldset>
+<p style="text-align:center;">
+<input type="submit" value="<<config-submit>>">
+</p>
+</form>
+</div>

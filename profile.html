@@ -6,13 +6,14 @@
 <span style="color:gray;"><%=desc%></span>
 </td>
 <td class="data" style="width:30%;">
-<button>Segueix</button>
-<div>Seguit per <big><b>11.000</b></big></div>
-<div>Seguint-ne <big><b>1.337</b></big></div>
-</button>
+<%=button%>
+<div><<profile-followers>> <big><b><%=followers%></b></big></div>
+<div><<profile-following>> <big><b><%=following%></b></big></div>
+</td>
 </tr>
 </table>
 <div class="recs">
 <%=recs%>
 </div>
+<div id="bmored"><button id="bmore" data-path="/more/<%=user%>"><<box-more>></button></div>
 </div>
